@@ -69,3 +69,4 @@ console.log(calculateDelivery(15, "Anytown", "no")); // Should return 0 (Anytown
 console.log(calculateDelivery(5, "Anytown", "no"));  // Should return 5 (Anytown but orderPrice <= 10)
 console.log(calculateDelivery(15, "OtherCity", "yes")); // Should return 0 (It's a birthday)
 console.log(calculateDelivery(5, "OtherCity", "no")); // Should return 5 (Neither conditions apply)
+}
