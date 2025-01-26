@@ -37,7 +37,7 @@ function askQuestion(questionNumber) {
 
 /* getAnswer() gets the answer from the text field and pushes it into the answers array, then calls the continueStory function */
 function getAnswer() {
-    answers.push = yourAnswer.value.toUpperCase();
+    answers.push(yourAnswer.value.toUpperCase()); // Corrected this line
     
     yourAnswer.value = "";
     continueStory(answers.length - 1);
