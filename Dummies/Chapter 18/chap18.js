@@ -1,19 +1,19 @@
-declare globals
+// declare globals
 var money = 20;
 var lunches = 0;
 
-display lunch budget
+//display lunch budget
 document.getElementById("money").innerHTML = money;
 
-listen for order
- orderButton = document.getElementById("placeOrder");
- orderButton.addEventListener("click", buyLunches);
+//listen for order
+// orderButton = document.getElementById("placeOrder");
+// orderButton.addEventListener("click", buyLunches);
 
 document.getElementById("placeOrder").addEventListener("click", buyLunches);
 
-
+/*
 buys specified number of sandwiches per day at current prices
-
+*/
 function buyLunches() {
     resetForm();
     var day = 0;
@@ -21,7 +21,7 @@ function buyLunches() {
         day++;
         var priceToday = getSandwichPrice();
         var numberOfSandwiches = document.getElementById("numSandwiches").value;
-        var totalPrice = priceToday numberOfSandwiches;
+        var totalPrice = priceToday * numberOfSandwiches;
 
 
         if (money >= totalPrice) {
@@ -39,24 +39,20 @@ function buyLunches() {
 
 }
 
-
+/*
 gets the current price of sandwiches
-
+*/
 function getSandwichPrice() {
-    var sandwichPrice = (Math.random() (1 - 0) + 1).toFixed(2);
+    var sandwichPrice = (Math.random() * (1 - 0) + 1).toFixed(2);
     return sandwichPrice;
 }
 
-
+/*
 resets the game so that a new order can be placed
-
- function resetForm() {
+*/
+function resetForm() {
     money = 20;
     lunches = 0;
     document.getElementById("receipt").innerHTML = "";
- }
 
-
-
-
-
+}
