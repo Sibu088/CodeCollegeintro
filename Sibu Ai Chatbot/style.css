@@ -1,0 +1,126 @@
+** {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  body {
+    font-family: 'Arial', sans-serif;
+    background: linear-gradient(to right, #4facfe, #00f2fe);
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    animation: bgAnimation 5s ease infinite;
+  }
+  
+  #chat-container {
+    width: 400px;
+    height: 500px;
+    background: rgba(255, 255, 255, 0.9);
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding: 20px;
+  }
+  
+  #chat-box {
+    height: 80%;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+  }
+  
+  .user-message, .bot-message {
+    padding: 10px 15px;
+    border-radius: 20px;
+    max-width: 80%;
+    animation: messageFadeIn 1s ease-in-out;
+  }
+  
+  .user-message {
+    background-color: #4caf50;
+    color: white;
+    align-self: flex-end;
+    transform: translateX(20px);
+    animation: slideInRight 0.8s ease-out;
+  }
+  
+  .bot-message {
+    background-color: #f1f1f1;
+    color: #333;
+    align-self: flex-start;
+    transform: translateX(-20px);
+    animation: slideInLeft 0.8s ease-out;
+  }
+  
+  #input-container {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+  }
+  
+  #user-input {
+    width: 80%;
+    padding: 10px;
+    border: 2px solid #ddd;
+    border-radius: 5px;
+    outline: none;
+    transition: border-color 0.3s;
+  }
+  
+  #user-input:focus {
+    border-color: #4caf50;
+  }
+  
+  #send-btn {
+    padding: 10px 20px;
+    background-color: #4caf50;
+    border: none;
+    color: white;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+  }
+  
+  #send-btn:hover {
+    transform: scale(1.1);
+  }
+  
+  /* Keyframe Animations */
+  @keyframes bgAnimation {
+    0% { background: linear-gradient(to right, #4facfe, #00f2fe); }
+    50% { background: linear-gradient(to right, #00f2fe, #4facfe); }
+    100% { background: linear-gradient(to right, #4facfe, #00f2fe); }
+  }
+  
+  @keyframes messageFadeIn {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+  
+  @keyframes slideInRight {
+    from {
+      transform: translateX(100px);
+    }
+    to {
+      transform: translateX(0);
+    }
+  }
+  
+  @keyframes slideInLeft {
+    from {
+      transform: translateX(-100px);
+    }
+    to {
+      transform: translateX(0);
+    }
+  }
+  
