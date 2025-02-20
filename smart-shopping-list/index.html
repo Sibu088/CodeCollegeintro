@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Smart Shopping List</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f4f4f4;
+        }
+
+        #login-section, #welcome-section {
+            max-width: 600px;
+            margin: auto;
+            padding: 20px;
+            background: white;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        #product-list {
+            display: flex;
+            flex-wrap: wrap;
+        }
+
+        .product {
+            flex: 1 1 200px;
+            margin: 10px;
+            padding: 10px;
+            border: 1px solid #ddd;
+            background: #fff;
+            text-align: center;
+        }
+
+        .product img {
+            max-width: 100%;
+            height: auto;
+        }
+
+        .product p {
+            margin: 10px 0;
+        }
+
+        .product button {
+            margin-top: 10px;
+        }
+
+        .quantity {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-top: 10px;
+        }
+
+        .quantity button {
+            width: 30px;
+            height: 30px;
+            margin: 0 5px;
+        }
+
+        .quantity span {
+            margin: 0 10px;
+        }
+    </style>
+</head>
+<body>
+    <div id="login-section">
+        <h2>Welcome to Checkers please enter your xtra savings card number</h2>
+        <img src="logo.png" alt="Logo" style="max-width: 100px; display: block; margin: auto;">
+        <input type="text" id="card-number" placeholder="Xtra Savings Card Number">
+        <button onclick="login()">Login</button>
+    </div>
+    <div id="welcome-section" style="display:none;">
+        <h2 id="welcome-message"></h2>
+        <div id="product-list">
+            <!-- Products will be displayed here -->
+        </div>
+        <button onclick="proceedToCheckout()">Proceed to Checkout</button>
+    </div>
+    <script>
+        const products = [
+            { name: 'Milk', price: '$2.00', imgSrc: 'milk.jpg' },
+            { name: 'Bread', price: '$1.50', imgSrc: 'cocacola.jpg' },
+            { name: 'Eggs', price: '$3.00', imgSrc: 'eggs.jpg' },
+            { name: 'Chicken', price:'R79.99', imgSrc:'chicken.jpg'},
+            { name: 'Doritos', price: 'R21.99', imgSrc:'doritos.jpg' },
+            { name: 'Ferrero Rocher', price: 'R64.99', imgSrc: 'ferrero rocher.jpg' },
+            { name: 'Kit Kat', price: 'R14.99', imgSrc: 'kit kat.jpg' },
+            { name: 'Lays', price: 'R21.99', imgSrc: 'lays.jpg' },
+            { name: 'Lindor', price: 'R249.99', imgSrc: 'lindor.jpg' },
+            { name: 'Ground Beef Mince', price: 'R45.99', imgSrc: 'mince.jpg' },
+            { name: 'Simba', price: 'R21.99', imgSrc:'simba.jpg' },
+            { name: 'Whispers', price: 'R34.99', imgSrc:'whispers.jpg' },
+            { name: 'Toilet Roll', price: 'R44.99', imgSrc:'toilet roll.jpg' },
+            { name: 'Mayonaise', price: 'R31.99', imgSrc: 'mayonnaise.jpg' },
+        ];
+        let cart = [];
+
+        function login() {
+            const cardNumber = document.getElementById('card-number').value;
+            if (cardNumber) {
+                document.getElementById('login-section').style.display = 'none';
+                document.getElementById('welcome-section').style.display = 'block';
+                document.getElementById('welcome-message').innerText = `Welcome, Card Number ${cardNumber}`;
+                displayProducts();
+            } else {
+                alert('Please enter your Xtra Savings Card Number');
+            }
+        }
+
+        function displayProducts() {
+            const productList = document.getElementById('product-list');
+            productList.innerHTML = '';
+            products.forEach(product => {
+                const productElement = document.createElement('div');
+                productElement.className = 'product';
+                productElement.innerHTML = `
+                    <img src="${product.imgSrc}" alt="${product.name}">
+                    <p>${product.name}</p>
+                    <p>${product.price}</p>
+                    <div class="quantity">
+                        <button onclick="updateQuantity('${product.name}', -1)">-</button>
+                        <span id="quantity-${product.name}">1</span>
+                        <button onclick="updateQuantity('${product.name}', 1)">+</button>
+                    </div>
+                    <button onclick="addToCart('${product.name}', '${product.price}')">Add to Cart</button>
+                `;
+                productList.appendChild(productElement);
+            });
+        }
+
+        function updateQuantity(name, change) {
+            const quantityElement = document.getElementById(`quantity-${name}`);
+            let currentQuantity = parseInt(quantityElement.innerText);
+            currentQuantity = Math.max(1, currentQuantity + change);
+            quantityElement.innerText = currentQuantity;
+        }
+
+        function addToCart(name, price) {
+            const quantity = parseInt(document.getElementById(`quantity-${name}`).innerText);
+            cart.push({ name, price, quantity });
+            alert(`${name} has been added to your cart.`);
+        }
+
+        function proceedToCheckout() {
+            const cartData = JSON.stringify(cart);
+            localStorage.setItem('cart', cartData);
+            window.location.href = 'checkout.html';
+        }
+    </script>
+</body>
+</html>
